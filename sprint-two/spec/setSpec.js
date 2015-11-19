@@ -20,6 +20,8 @@ describe('set', function() {
 
   it('should remove values from a set', function(){
     set.add("Mel Gibson");
+    //added additional test to deal with false positives
+    expect(set.contains("Mel Gibson")).to.equal(true);
     set.remove("Mel Gibson");
     expect(set.contains("Mel Gibson")).to.equal(false);
   });
