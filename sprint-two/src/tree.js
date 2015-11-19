@@ -21,7 +21,6 @@ treeMethods.contains = function(target) {
   var result = false;
   var subroutine = function(node){
     if (node.value === target) {
-    console.log(node.value ===target);
       result = true;
     } 
 
