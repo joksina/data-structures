@@ -34,11 +34,8 @@ Graph.prototype.removeNode = function(node) {
 // ------------------------
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
-  if(_.contains(this.edges[fromNode], toNode)){
-    return true;
-  } else {
-    return false;
-  }
+  return _.contains(this.edges[fromNode], toNode);
+    
 };
 
 // ------------------------
@@ -46,9 +43,12 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 Graph.prototype.addEdge = function(fromNode, toNode) {
   if (this.edges[fromNode] === undefined){
     
-    this.edges[fromNode] = [toNode];
+    this.edges[fromNode] = { toNode : toNode };
+    this.edges[toNode] = { fromNode : fromNode };
   } else {
-  this.edges[fromNode].push(toNode);
+  _.extend(this.edges[fromNode], { toNode : toNode });
+  _.extend(this.edges[toNode] = { fromNode : fromNode });
+
   
   }
 };
@@ -56,10 +56,10 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
 // ------------------------
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  var toNodeIndex = _.indexOf(this.edges[fromNode], toNode);
   if (this.hasEdge(fromNode, toNode)){
-    delete this.edges[fromNode][toNodeIndex];
-  }
+    delete this.edges[fromNode].toNode;
+    delete this.edges[toNode].fromNode;
+  } 
 };
 
 // ------------------------
