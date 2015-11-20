@@ -11,7 +11,6 @@ var Graph = function() {
 // ------------------------
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
-  console.log(this.nodes)
   this.nodes[node] = node;
 
 };
@@ -19,7 +18,6 @@ Graph.prototype.addNode = function(node) {
 // ------------------------
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
 Graph.prototype.contains = function(node) {
-  console.log(this.nodes)
   if(this.nodes[node]){
     return true;
   } else {
@@ -48,17 +46,20 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 Graph.prototype.addEdge = function(fromNode, toNode) {
   if (this.edges[fromNode] === undefined){
     
-    this.edges[fromNode] = [toNode]
+    this.edges[fromNode] = [toNode];
   } else {
   this.edges[fromNode].push(toNode);
-  //this.edges[toNode].push(fromNode);
+  
   }
 };
 
 // ------------------------
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  delete this.edges[fromNode]
+  var toNodeIndex = _.indexOf(this.edges[fromNode], toNode);
+  if (this.hasEdge(fromNode, toNode)){
+    delete this.edges[fromNode][toNodeIndex];
+  }
 };
 
 // ------------------------

@@ -48,6 +48,15 @@ describe('graph', function() {
     expect(graph.hasEdge(3, 1)).to.equal(false);
   });
 
+  it('should remove edges between nodes (ONE WAY)', function() {
+    graph.addNode(4);
+    graph.addNode(5);
+    graph.addEdge(4,5);
+    expect(graph.hasEdge(4, 5)).to.equal(true);
+    graph.removeEdge(4, 5);
+    expect(graph.hasEdge(4, 5)).to.equal(false);
+  });
+
   it('should remove edges between nodes', function() {
     graph.addNode(4);
     graph.addNode(5);
