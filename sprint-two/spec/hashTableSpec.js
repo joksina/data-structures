@@ -17,7 +17,7 @@ describe('hashTable', function() {
     hashTable.insert('Steven', 'Seagal');
     expect(hashTable.retrieve('Steven')).to.equal('Seagal');
   });
-  
+
   it('should not contain values that were not inserted', function() {
     hashTable.insert('Steven', 'Spielberg');
     expect(hashTable.retrieve('Steven')).not.to.equal('Seagal');
@@ -36,6 +36,7 @@ describe('hashTable', function() {
   });
 
   it('should handle hash function collisions', function(){
+    debugger;
     var v1 = "val1";
     var v2 = "val2";
     var oldHashFunction = window.getIndexBelowMaxForKey;

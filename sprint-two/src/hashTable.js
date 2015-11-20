@@ -7,25 +7,25 @@ var HashTable = function() {
 
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
+  //declare a collided variable
+  //declare newSlot variable
+  //if k matches collided
+    //then return newSlot
   var item = this._storage.get(index);
-  //var checker = function(value){  
     if(item === undefined){
-      this._storage.set(index, [k,v]);
+      this._storage.set(index, [[k,v]]);
     } else {
-      // for(var i = 0; i<item.length; i++){
-      //   if (item[i][0] === k) {
-      //     item[i][1] = v;
-      //   }
-        if (item[0] === k) {
-          item[1] = v;
-        } 
-        // else {
-        //   var newItem = this._storage.get(index+1);
-        //   return checker(newItem);
-        // }
+      for(var i = 0; i<item.length; i++){
+        if (item[i][0] === k) {
+          item[i][1] = v;
+        }
+      }
+        item.push([k,v]); 
+     
+
     }
-  //};
-  //checker(item);
+
+  
   //if at 75% capacity
     //double size
     //slice
@@ -34,11 +34,15 @@ HashTable.prototype.insert = function(k, v) {
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   var item = this._storage.get(index);
-  //   if (item[i][0] === k ){
+  console.log(index);
+  for (var i = 0; i < item.length; i++) {
+    if (item[i][0] === k ){
       // return item[i][1];
-      return item[1];
-  //   }
-  //   return undefined;
+      return item[i][1];
+     }
+  };
+     
+     return undefined;
   
 
   //return this._storage[index];
@@ -47,11 +51,14 @@ HashTable.prototype.retrieve = function(k) {
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   var item = this._storage.get(index);
-  //   if( item[i][0] === k) {
+    for (var i = 0; i < item.length; i++) {
+      if( item[i][0] === k) {
       // return item.splice(i, 1);
-      return item.splice(k, 1);
+      return item.splice(i, 1);
       
-  //   }
+     }
+    };
+     
 
   //item[1] = undefined;
 
