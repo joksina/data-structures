@@ -36,6 +36,18 @@ describe('graph', function() {
     expect(graph.hasEdge(3, 1)).to.equal(false);
   });
 
+  it('should create edges between three nodes', function() {
+    graph.addNode(2);
+    graph.addNode(1);
+    graph.addNode(3);
+    graph.addNode(4);
+    graph.addEdge(3, 2);
+    expect(graph.hasEdge(3, 2)).to.equal(true);
+    graph.addEdge(3, 4);
+    expect(graph.hasEdge(3, 4)).to.equal(true);
+    expect(graph.hasEdge(3, 1)).to.equal(false);
+  });
+
   it('should remove edges between nodes', function() {
     graph.addNode(4);
     graph.addNode(5);

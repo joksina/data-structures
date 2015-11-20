@@ -36,7 +36,6 @@ describe('hashTable', function() {
   });
 
   it('should handle hash function collisions', function(){
-    debugger;
     var v1 = "val1";
     var v2 = "val2";
     var oldHashFunction = window.getIndexBelowMaxForKey;
