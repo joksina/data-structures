@@ -12,7 +12,7 @@ return nodes;
 var binaryMethods = {};
 
 
-binaryMethods.search = function(tree, target){
+//binaryMethods.search = function(tree, target){
   //if no origin set, set to this.nodes
 
   //declare currentNode equal to origin
@@ -26,27 +26,57 @@ binaryMethods.search = function(tree, target){
         //set currentNode to currentNode.right
       //else return currentNode
   //call subroutine on origin
+//};
+
+binaryMethods.insert = function(val){
+  var newTree = BinarySearchTree(val);
+  var innerFunc = function(tree) {
+    if( tree.left === undefined && val < tree.value ) {
+     tree.left = newTree;
+    } else if ( tree.right === undefined && val > tree.value ) {
+      tree.right = newTree;
+     } else if ( val < tree.value ) {
+      innerFunc(tree.left);
+    } else { 
+       innerFunc(tree.right);
+    }
+  };
+ innerFunc(this);
+  
 };
 
-binaryMethods.insert = function(value){
-  // var adds = BinarySearchTree(value);
-  // var tree = function(trees){
-  //   if( trees.left === undefined && value < trees.value) {
-  //     trees.left = adds;
-  //   } else 
-  // }
+binaryMethods.contains = function(target){
+  
 
-  //call search on entire tree to find location for insterted value
+  if(this.value === target){
+    return true;
+  }
+  if(target < this.value && this.left){
+    return this.left.contains(target);
+  }
+  if(target > this.value && this.right){
+    return this.right.contains(target);
+  }
 
-var adds = BinarySearchTree(value);
+  return false;
 
 };
 
-binaryMethods.contains = function(value){
+binaryMethods.depthFirstLog = function(cb){
+  var innerFunc = function(tree) {
+     if(tree.value) {
+      cb(tree.value);
+    }
+   if(tree.left) {
+      innerFunc(tree.left);
+    }
+   if(tree.right) {
 
+    innerFunc(tree.right);
+  }
 };
-
-binaryMethods.depthFirstLog = function(){
+  
+  innerFunc(this);
 
 };
 /*
