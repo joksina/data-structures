@@ -3,6 +3,7 @@
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
+  this._increment = 0
 };
 
 HashTable.prototype.insert = function(k, v) {
@@ -15,13 +16,27 @@ HashTable.prototype.insert = function(k, v) {
     if(item === undefined){
       this._storage.set(index, [[k,v]]);
     } else {
+      //if item at index's key /=== k
+        //push duple to array in index
       for(var i = 0; i<item.length; i++){
         if (item[i][0] === k) {
           item[i][1] = v;
         }
       }
-        item.push([k,v]); 
-     
+        item.push([k,v]);
+        this._increment++;
+        //check if increment/limit > 75%
+        if( this._increment/this._limit > .75 ) {
+          //if yes, double capacity
+          this._limit = this._limit * 2;
+          //iterate over item
+          for (var i = 0; i < item.length; i++) {
+            for (var j = 0; j < item[i].length; j++) {
+             insert(item[i][j][0],item[i][j][1]);
+            }
+          }           
+        }
+          
 
     }
 
@@ -45,6 +60,20 @@ HashTable.prototype.retrieve = function(k) {
   
 
   //return this._storage[index];
+  this._increment--;
+  //check if increment/limit < 25%
+     //if yes, halve capacity
+    if( this._increment/this._limit < .25 ) {
+      this._limit = this._limit / 2;
+      for (var i = 0; i < item.length; i++) {
+        for (var j = 0; j < item[i].length; j++) {
+         insert(item[i][j][0],item[i][j][1]);
+        }
+      }           
+    }
+
+
+  
 };
 
 HashTable.prototype.remove = function(k) {
