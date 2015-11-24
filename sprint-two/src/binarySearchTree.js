@@ -12,23 +12,7 @@ return nodes;
 var binaryMethods = {};
 
 
-//binaryMethods.search = function(tree, target){
-  //if no origin set, set to this.nodes
-
-  //declare currentNode equal to origin
-  //declare subroutine
-    //if currentNode equals target
-      //return currentNode
-    //else if node.children exist
-      //if origin.value > target
-        //set currentNode to currentNode.left
-      //else if currentNode < target
-        //set currentNode to currentNode.right
-      //else return currentNode
-  //call subroutine on origin
-//};
-
-binaryMethods.insert = function(val){
+binaryMethods.insert = function(val){ //O(log n)
   var newTree = BinarySearchTree(val);
   var innerFunc = function(tree) {
     if( tree.left === undefined && val < tree.value ) {
@@ -45,7 +29,7 @@ binaryMethods.insert = function(val){
   
 };
 
-binaryMethods.contains = function(target){
+binaryMethods.contains = function(target){ //O(log n)
   
 
   if(this.value === target){
@@ -62,7 +46,7 @@ binaryMethods.contains = function(target){
 
 };
 
-binaryMethods.depthFirstLog = function(cb){
+binaryMethods.depthFirstLog = function(cb){ //O(n)
   var innerFunc = function(tree) {
      if(tree.value) {
       cb(tree.value);
