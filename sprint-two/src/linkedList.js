@@ -46,4 +46,7 @@ var Node = function(value) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ O(1)
+ O(1)
+ O(n)
  */
